@@ -45,18 +45,18 @@ const RaceResultEditor: React.SFC<RaceResultEditorProps> = ({ raceResult, onReci
 
         
     const isMax = {
-        [CheckPoint.Ornak]: () => raceResult.ornak === maxs[CheckPoint.Ornak],
-        [CheckPoint.Murowaniec]:() => raceResult.murowaniec === maxs[CheckPoint.Murowaniec],
-        [CheckPoint.Wodogrzmoty]: () => raceResult.wodogrzmoty === maxs[CheckPoint.Wodogrzmoty],
-        [CheckPoint.Meta]: () => raceResult.meta === maxs[CheckPoint.Meta],
+        [CheckPoint.Ornak]: () => raceResult.ornak >= maxs[CheckPoint.Ornak],
+        [CheckPoint.Murowaniec]:() => raceResult.murowaniec >= maxs[CheckPoint.Murowaniec],
+        [CheckPoint.Wodogrzmoty]: () => raceResult.wodogrzmoty >= maxs[CheckPoint.Wodogrzmoty],
+        [CheckPoint.Meta]: () => raceResult.meta >= maxs[CheckPoint.Meta],
     };
 
             
     const isMin = {
-        [CheckPoint.Ornak]: () => raceResult.ornak === mins[CheckPoint.Ornak],
-        [CheckPoint.Murowaniec]:() => raceResult.murowaniec === mins[CheckPoint.Murowaniec],
-        [CheckPoint.Wodogrzmoty]: () => raceResult.wodogrzmoty === mins[CheckPoint.Wodogrzmoty],
-        [CheckPoint.Meta]: () => raceResult.meta === mins[CheckPoint.Meta],
+        [CheckPoint.Ornak]: () => raceResult.ornak <= mins[CheckPoint.Ornak],
+        [CheckPoint.Murowaniec]:() => raceResult.murowaniec <= mins[CheckPoint.Murowaniec],
+        [CheckPoint.Wodogrzmoty]: () => raceResult.wodogrzmoty <= mins[CheckPoint.Wodogrzmoty],
+        [CheckPoint.Meta]: () => raceResult.meta <= mins[CheckPoint.Meta],
     };
 
 
@@ -128,7 +128,15 @@ const RaceResultEditor: React.SFC<RaceResultEditorProps> = ({ raceResult, onReci
 
     const updateRecipe = (item: CheckPoint, value: number) => {
       
+        if(isMin[CheckPoint.Meta]() || isMin[CheckPoint.Ornak]() || isMin[CheckPoint.Wodogrzmoty]() || isMin[CheckPoint.Murowaniec]()
+        ||isMax[CheckPoint.Meta]() || isMax[CheckPoint.Ornak]() || isMax[CheckPoint.Wodogrzmoty]() || isMax[CheckPoint.Murowaniec]()){
+            return;
+        }
+
+
         const updatedRecipe = { ...raceResult };
+
+
 
         ///*
         updatedRecipe[item] = Math.round(updatedRecipe[item]/steps[item]) * steps[item];
@@ -222,13 +230,13 @@ const RaceResultEditor: React.SFC<RaceResultEditorProps> = ({ raceResult, onReci
 
     const increaseButton = (item: CheckPoint) => (
         <IconButton onClick={() => increaseRecipe(item)} color="primary">
-            {isMax[item]() ? <BlockIcon /> : <ArrowForwardIosIcon />}
+            {isMax[CheckPoint.Meta]() || isMax[CheckPoint.Ornak]() || isMax[CheckPoint.Wodogrzmoty]() || isMax[CheckPoint.Murowaniec]()? <BlockIcon /> : <ArrowForwardIosIcon />}
         </IconButton>
     );
 
     const decreaseButton = (item: CheckPoint) => (
         <IconButton onClick={() => decreaseRecipe(item)} color="primary">
-            {isMin[item]() ? <BlockIcon /> : <ArrowBackIosIcon />}
+            {isMin[CheckPoint.Meta]() || isMin[CheckPoint.Ornak]() || isMin[CheckPoint.Wodogrzmoty]() || isMin[CheckPoint.Murowaniec]() ? <BlockIcon /> : <ArrowBackIosIcon />}
         </IconButton>
     );
 
@@ -259,7 +267,7 @@ const RaceResultEditor: React.SFC<RaceResultEditorProps> = ({ raceResult, onReci
                 min={0}
                 max={18*3600}
                 step={5*60}
-                onChange={(_y, value) => updateRecipe(CheckPoint.Murowaniec, value as number)}
+                onChange={(_, value) => updateRecipe(CheckPoint.Murowaniec, value as number)}
                 marks={[{ value: raceResult.murowaniec, label: toTimeString(raceResult.murowaniec) }]}
             />
             {/* Ratio */}
