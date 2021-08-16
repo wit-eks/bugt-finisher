@@ -127,9 +127,31 @@ const RaceResultEditor: React.SFC<RaceResultEditorProps> = ({ raceResult, onReci
     };
 
     const updateRecipe = (item: CheckPoint, value: number) => {
-        console.log("---");
-        console.log(item);
+      
         const updatedRecipe = { ...raceResult };
+
+        ///*
+        updatedRecipe[item] = Math.round(updatedRecipe[item]/steps[item]) * steps[item];
+
+        const val = updatedRecipe[item];
+        //console.log(val);
+        
+        for (const key in updatedRecipe) {
+            const keyItem = key as CheckPoint;
+           
+            if (updatedRecipe.hasOwnProperty(key)) {
+                if (key === item) {
+                    updatedRecipe[keyItem] = value;}
+                    else{
+
+                  updatedRecipe[keyItem] = calculateAll[item](val, keyItem);               
+                 }
+                }
+          }
+//*/
+
+
+/*
         for (const key in updatedRecipe) {
             const keyItem = key as CheckPoint;
             if (updatedRecipe.hasOwnProperty(key)) {
@@ -139,7 +161,7 @@ const RaceResultEditor: React.SFC<RaceResultEditorProps> = ({ raceResult, onReci
                     updatedRecipe[keyItem] = calculate[keyItem]();
                 }
             }
-        }
+        }//*/
 
         onRecipeChanged && onRecipeChanged(updatedRecipe);
     };
@@ -222,7 +244,8 @@ const RaceResultEditor: React.SFC<RaceResultEditorProps> = ({ raceResult, onReci
                 value={raceResult.ornak}
                 min={0}
                 max={18*3600}
-                //onChange={(_, value) => updateRecipe(CheckPoint.Ornak, value as number)}
+                step={5*60}
+                onChange={(_, value) => updateRecipe(CheckPoint.Ornak, value as number)}
                 marks={[{ value: raceResult.ornak, label: toTimeString(raceResult.ornak) }]}
             />
 
@@ -236,7 +259,7 @@ const RaceResultEditor: React.SFC<RaceResultEditorProps> = ({ raceResult, onReci
                 min={0}
                 max={18*3600}
                 step={5*60}
-                //onChange={(_: any, value: number) => updateRecipe(CheckPoint.Murowaniec, value as number)}
+                onChange={(_y, value) => updateRecipe(CheckPoint.Murowaniec, value as number)}
                 marks={[{ value: raceResult.murowaniec, label: toTimeString(raceResult.murowaniec) }]}
             />
             {/* Ratio */}
@@ -250,7 +273,7 @@ const RaceResultEditor: React.SFC<RaceResultEditorProps> = ({ raceResult, onReci
                 min={0}
                 max={18*3600}
                 step={5*60}
-                //onChange={(_, value) => updateRecipe(CheckPoint.Wodogrzmoty, value as number)}
+                onChange={(_, value) => updateRecipe(CheckPoint.Wodogrzmoty, value as number)}
                 marks={[{ value: raceResult.wodogrzmoty, label: toTimeString(raceResult.wodogrzmoty)}]}
             />
 
@@ -265,7 +288,7 @@ const RaceResultEditor: React.SFC<RaceResultEditorProps> = ({ raceResult, onReci
                 min={0}
                 max={18*3600}
                 step={5*60}
-                //onChange={(_: any, value: number) => updateRecipe(CheckPoint.Meta, value as number)}
+                onChange={(_, value) => updateRecipe(CheckPoint.Meta, value as number)}
                 marks={[{ value: raceResult.meta, label: toTimeString(raceResult.meta)}]}
             />
 
