@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
+import { RaceResult } from './models/RaceResult';
+import RaceResultEditor from './components/RaceResultEditor';
+
+
+
+const App = () => {
+  const [raceResult, setRecipe] = useState(new RaceResult(15*3600));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="sm">
+    <Box>
+              <RaceResultEditor raceResult={raceResult} onRecipeChanged={setRecipe} />
+              </Box>
+        </Container>
   );
-}
+};
 
 export default App;
