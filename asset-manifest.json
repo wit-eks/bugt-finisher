@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/bugt-finisher/static/css/main.a617e044.chunk.css",
+    "main.js": "/bugt-finisher/static/js/main.d51c2a4a.chunk.js",
+    "main.js.map": "/bugt-finisher/static/js/main.d51c2a4a.chunk.js.map",
+    "runtime-main.js": "/bugt-finisher/static/js/runtime-main.27b1f971.js",
+    "runtime-main.js.map": "/bugt-finisher/static/js/runtime-main.27b1f971.js.map",
+    "static/js/2.290d943f.chunk.js": "/bugt-finisher/static/js/2.290d943f.chunk.js",
+    "static/js/2.290d943f.chunk.js.map": "/bugt-finisher/static/js/2.290d943f.chunk.js.map",
+    "static/js/3.a77ae119.chunk.js": "/bugt-finisher/static/js/3.a77ae119.chunk.js",
+    "static/js/3.a77ae119.chunk.js.map": "/bugt-finisher/static/js/3.a77ae119.chunk.js.map",
+    "index.html": "/bugt-finisher/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/bugt-finisher/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.290d943f.chunk.js.LICENSE.txt": "/bugt-finisher/static/js/2.290d943f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.27b1f971.js",
+    "static/js/2.290d943f.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.d51c2a4a.chunk.js"
+  ]
+}
